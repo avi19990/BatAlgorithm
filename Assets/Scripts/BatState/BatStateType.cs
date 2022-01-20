@@ -1,0 +1,1 @@
+public enum BatStateType { BatDistributionState, BatHuntState, BatReturnState }

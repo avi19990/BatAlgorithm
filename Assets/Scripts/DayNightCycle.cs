@@ -6,14 +6,14 @@ public class DayNightCycle : MonoBehaviour
     public float time;
 
     enum DayPeriod { Day, Night }
-    DayPeriod dayPeriod = DayPeriod.Night;
+    DayPeriod dayPeriod = DayPeriod.Day;
 
     public event Action dayStart;
     public event Action dayEnd;
 
     void Start()
     {
-        time = 0.0f;
+        time = 9.0f;
     }
 
     void Update()

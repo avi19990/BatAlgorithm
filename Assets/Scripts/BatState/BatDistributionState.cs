@@ -19,17 +19,13 @@ public class BatDistributionState : IBatState
 
         for (int i = 0; i < manager.BatsCount; ++i)
         {
-            Bat tempBat = new Bat();
-
             Vector3 randPosition = manager.BatSpawnPoint.position + Random.onUnitSphere * manager.BatSpawnRadius;
 
-            tempBat.position = randPosition;
-            tempBat.velocity = new Vector3();
-            tempBat.pulseRate = 0.0f;
-            tempBat.loudness = manager.LoudnessMax;
-            tempBat.frequency = 0.0f;
-
-            manager.Bats.Add(tempBat);
+            manager.Bats[i].position = randPosition;
+            manager.Bats[i].velocity = new Vector3();
+            manager.Bats[i].pulseRate = 0.0f;
+            manager.Bats[i].loudness = manager.LoudnessMax;
+            manager.Bats[i].frequency = 0.0f;
         }
     }
 

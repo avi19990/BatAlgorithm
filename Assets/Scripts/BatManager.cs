@@ -143,9 +143,17 @@ public class BatManager : MonoBehaviour
         int batsComplete = 0;
         for (int i = 0; i < BatsCount; ++i)
         {
+            float maxWanderRadius;
+            if (batState.BatStateType == BatStateType.BatDistributionState)
+                maxWanderRadius = 5.0f;
+            else if (batState.BatStateType == BatStateType.BatHuntState)
+                maxWanderRadius = 5.0f;
+            else
+                maxWanderRadius = (50.0f / (1 + Mathf.Exp(-(Vector3.Distance(outputBats[i].position, batSpawnPoint.position) + 10.0f) / 25.0f))) - 25.0f;
+
             outputBats[i].wanderOffset = Vector3.MoveTowards(outputBats[i].wanderOffset, outputBats[i].wanderPoint, batWanderSpeed * Time.deltaTime);
-            if (outputBats[i].wanderOffset == outputBats[i].wanderPoint)
-                outputBats[i].wanderPoint = Random.onUnitSphere * Random.Range(1.0f, 5.0f);
+            if (outputBats[i].wanderOffset == outputBats[i].wanderPoint || outputBats[i].wanderPoint.magnitude > maxWanderRadius)
+                outputBats[i].wanderPoint = Random.onUnitSphere * Random.Range(1.0f, maxWanderRadius);
 
             Vector3 newPosition = Vector3.MoveTowards(outputBats[i].position, bats[i].position, batSpeed * Time.deltaTime);
             Vector3 offset = newPosition + outputBats[i].wanderOffset;
@@ -192,6 +200,8 @@ public class BatManager : MonoBehaviour
 
     private void dayEnd()
     {
+        simulationIterations = 0;
+
         ChangeBatState(BatStateType.BatDistributionState);
 
         for (int i = 0; i < BatsCount; ++i)
@@ -205,7 +215,7 @@ public class BatManager : MonoBehaviour
             preyWeights[i] = Random.Range(0.0f, 1.0f);
 
             prey[i].position = new Vector3(Random.Range(AreaMin, AreaMax), Random.Range(AreaMin, AreaMax), Random.Range(AreaMin, AreaMax));
-            prey[i].localScale = new Vector3(1.0f + preyWeights[i] * 5.0f, 1.0f + preyWeights[i] * 5.0f, 1.0f + preyWeights[i] * 5.0f);
+            prey[i].localScale = new Vector3(1.0f + preyWeights[i] * 20.0f, 1.0f + preyWeights[i] * 20.0f, 1.0f + preyWeights[i] * 20.0f);
             prey[i].gameObject.SetActive(true);
         }
     }

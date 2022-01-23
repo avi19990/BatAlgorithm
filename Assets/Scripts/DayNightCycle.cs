@@ -6,6 +6,7 @@ public class DayNightCycle : MonoBehaviour
     public float time = 9.0f;
 
     public Light sunLight;
+    public Light nightLight;
 
     enum DayPeriod { Day, Night }
     DayPeriod dayPeriod = DayPeriod.Day;
@@ -34,11 +35,21 @@ public class DayNightCycle : MonoBehaviour
         }
 
         Quaternion lightRotation;
+        Quaternion nightRotation;
         if (dayPeriod == DayPeriod.Day)
-            lightRotation = Quaternion.AngleAxis(90.0f, new Vector3(0.0f, 1.0f, 0.0f)) * Quaternion.AngleAxis(time / 12.0f * 230.0f - 50.0f, new Vector3(1.0f, 0.0f, 0.0f));
-        else
+        {
+            lightRotation = Quaternion.AngleAxis(90.0f, new Vector3(0.0f, 1.0f, 0.0f)) *
+                            Quaternion.AngleAxis(time / 12.0f * 230.0f - 50.0f, new Vector3(1.0f, 0.0f, 0.0f));
+            nightRotation = Quaternion.AngleAxis(90.0f, new Vector3(0.0f, 1.0f, 0.0f)) *
+                            Quaternion.AngleAxis(time / 12.0f * 230.0f - 50.0f + 180f, new Vector3(1.0f, 0.0f, 0.0f));
+        }
+        else 
+        {
             lightRotation = Quaternion.AngleAxis(90.0f, new Vector3(0.0f, 1.0f, 0.0f)) * Quaternion.AngleAxis(time / 12.0f * 130.0f + 180.0f, new Vector3(1.0f, 0.0f, 0.0f));
-
+            nightRotation = Quaternion.AngleAxis(90.0f, new Vector3(0.0f, 1.0f, 0.0f)) *
+                            Quaternion.AngleAxis(time / 12.0f * 130.0f + 180.0f + 180f, new Vector3(1.0f, 0.0f, 0.0f));
+        }
         sunLight.transform.rotation = lightRotation;
+        nightLight.transform.rotation = nightRotation;
     }
 }

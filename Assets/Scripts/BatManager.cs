@@ -150,7 +150,7 @@ public class BatManager : MonoBehaviour
                 maxWanderRadius = 5.0f;
             else
                 maxWanderRadius = (50.0f / (1 + Mathf.Exp(-(Vector3.Distance(outputBats[i].position, batSpawnPoint.position) + 10.0f) / 25.0f))) - 25.0f;
-
+            Vector3 oldPosition = outputBats[i].transform.position;
             outputBats[i].wanderOffset = Vector3.MoveTowards(outputBats[i].wanderOffset, outputBats[i].wanderPoint, batWanderSpeed * Time.deltaTime);
             if (outputBats[i].wanderOffset == outputBats[i].wanderPoint || outputBats[i].wanderPoint.magnitude > maxWanderRadius)
                 outputBats[i].wanderPoint = Random.onUnitSphere * Random.Range(1.0f, maxWanderRadius);
@@ -160,7 +160,7 @@ public class BatManager : MonoBehaviour
 
             outputBats[i].position = newPosition;
             outputBats[i].transform.position = offset;
-
+            outputBats[i].transform.rotation = Quaternion.LookRotation(oldPosition - offset);
             if (newPosition == bats[i].position)
                 batsComplete += 1;
         }

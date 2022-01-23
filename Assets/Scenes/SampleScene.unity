@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4514042, g: 0.5005281, b: 0.57035244, a: 1}
+  m_IndirectSpecularColor: {r: 0.45140463, g: 0.5005286, b: 0.5703535, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -452,13 +452,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.2183987, y: 0, z: 0, w: 0.97585964}
-  m_LocalPosition: {x: 0, y: 45.6, z: -206.8}
+  m_LocalRotation: {x: 0.090504386, y: -0.88812506, z: 0.19876336, w: 0.40439597}
+  m_LocalPosition: {x: 248.2, y: 132.3, z: 215.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25.23, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.23, y: -131.037, z: 0}
 --- !u!1 &1092776929
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1092776931}
   - component: {fileID: 1092776932}
+  - component: {fileID: 1092776930}
   m_Layer: 0
   m_Name: BatController
   m_TagString: Untagged
@@ -476,6 +477,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1092776930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092776929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 200, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1092776931
 Transform:
   m_ObjectHideFlags: 0
@@ -484,7 +498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092776929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 100, y: 118.2, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -516,7 +530,7 @@ MonoBehaviour:
   batSpawnRadius: 3
   batSpawnPoint: {fileID: 1919051017}
   batPrefab: {fileID: 2034979241817552612, guid: 116fa2815545a2a48862336a90ed70e9, type: 3}
-  preyPrefab: {fileID: 1810408617175785345, guid: d2ae0a35cb1e77b4ab940130cca78084, type: 3}
+  preyPrefab: {fileID: 5645878491125163899, guid: 604d458c4c9ee964bb5f242e3e07fa60, type: 3}
   preyCount: 5
   dayNightCycle: {fileID: 870449057}
   simulationIterations: 0
@@ -590,7 +604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165075806}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -97, y: -103, z: -84.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -690,15 +704,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4110004706845464418, guid: 01fac311703dbf54e87bfaafc84a5a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -61
+      value: 27.9
       objectReference: {fileID: 0}
     - target: {fileID: 4110004706845464418, guid: 01fac311703dbf54e87bfaafc84a5a5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -96.6
+      value: 10.6
       objectReference: {fileID: 0}
     - target: {fileID: 4110004706845464418, guid: 01fac311703dbf54e87bfaafc84a5a5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -78.5
+      value: 13.1
       objectReference: {fileID: 0}
     - target: {fileID: 4110004706845464418, guid: 01fac311703dbf54e87bfaafc84a5a5b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -754,7 +768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919051016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -79.9, y: -95.1, z: -80.4}
+  m_LocalPosition: {x: 9.27, y: 14.8, z: 12.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

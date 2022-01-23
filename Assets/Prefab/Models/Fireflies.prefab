@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireflyPrefab: {fileID: 8604015381592685154, guid: f42cf377e3d5d7945b001c04cad35fb0, type: 3}
-  count: 150
+  count: 1

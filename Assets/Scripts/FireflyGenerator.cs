@@ -5,20 +5,24 @@ using UnityEngine;
 public class FireflyGenerator : MonoBehaviour
 {
     public Transform fireflyPrefab;
-    public int count;
+    private List<Transform> fireflies;
 
-    void Start()
+    private void Awake()
     {
-     for (int i = 0; i < count; i++)
-        {
-            
-           Transform firefly = Instantiate(fireflyPrefab, Random.onUnitSphere * Random.Range(1.0f, 10.0f), Quaternion.identity, transform);
-        }   
+        fireflies = new List<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GenerateFireflies(int count)
     {
-        
+        for (int i = 0; i < fireflies.Count; ++i)
+            Destroy(fireflies[i].gameObject);
+        fireflies.Clear();
+
+        for (int i = 0; i < count; i++)
+        {
+            Transform tempFirefly = Instantiate(fireflyPrefab, new Vector3(), Quaternion.identity, transform);
+            tempFirefly.transform.localPosition = Random.onUnitSphere * Random.Range(1.0f, 10.0f);
+            fireflies.Add(tempFirefly);
+        }
     }
 }

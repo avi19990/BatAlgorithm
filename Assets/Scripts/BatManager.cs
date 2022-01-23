@@ -7,7 +7,7 @@ public class BatManager : MonoBehaviour
     [SerializeField]
     private int batsCount;
     [SerializeField]
-    private float areaMin, areaMax;
+    private Vector3 areaMin, areaMax;
     [SerializeField]
     private float batSpeed;
     [SerializeField]
@@ -34,12 +34,12 @@ public class BatManager : MonoBehaviour
 
     [Header("Prey config")]
     [SerializeField]
-    private Transform preyPrefab;
+    private FireflyGenerator preyPrefab;
     [SerializeField]
     private int preyCount;
 
     private List<float> preyWeights;
-    private List<Transform> prey;
+    private List<FireflyGenerator> prey;
 
     [Header("Simulation config")]
     [SerializeField]
@@ -50,8 +50,8 @@ public class BatManager : MonoBehaviour
     private int simulationIterations = 0;
 
     public int BatsCount => batsCount;
-    public float AreaMin => areaMin;
-    public float AreaMax => areaMax;
+    public Vector3 AreaMin => areaMin;
+    public Vector3 AreaMax => areaMax;
     public float BatSpeed => batSpeed;
 
     public float FrequencyMin => frequencyMin;
@@ -68,8 +68,8 @@ public class BatManager : MonoBehaviour
     public Transform BatPrefab => batPrefab;
 
     public List<float> PreyWeights => preyWeights;
-    public List<Transform> Prey => prey;
-    public Transform PreyPrefab => preyPrefab;
+    public List<FireflyGenerator> Prey => prey;
+    public FireflyGenerator PreyPrefab => preyPrefab;
     public int PreyCount => preyCount;
 
     public int SimulationIterations => simulationIterations;
@@ -99,13 +99,13 @@ public class BatManager : MonoBehaviour
             bats.Add(tempBat);
         }
 
-        prey = new List<Transform>();
+        prey = new List<FireflyGenerator>();
         preyWeights = new List<float>();
         for (int i = 0; i < preyCount; ++i)
         {
             preyWeights.Add(0.0f);
 
-            Transform tempPrey = Instantiate(PreyPrefab, new Vector3(), Quaternion.identity, transform);
+            FireflyGenerator tempPrey = Instantiate(PreyPrefab, new Vector3(), Quaternion.identity, transform);
             tempPrey.gameObject.SetActive(false);
             prey.Add(tempPrey);
         }
@@ -150,7 +150,9 @@ public class BatManager : MonoBehaviour
                 maxWanderRadius = 5.0f;
             else
                 maxWanderRadius = (50.0f / (1 + Mathf.Exp(-(Vector3.Distance(outputBats[i].position, batSpawnPoint.position) + 10.0f) / 25.0f))) - 25.0f;
+
             Vector3 oldPosition = outputBats[i].transform.position;
+
             outputBats[i].wanderOffset = Vector3.MoveTowards(outputBats[i].wanderOffset, outputBats[i].wanderPoint, batWanderSpeed * Time.deltaTime);
             if (outputBats[i].wanderOffset == outputBats[i].wanderPoint || outputBats[i].wanderPoint.magnitude > maxWanderRadius)
                 outputBats[i].wanderPoint = Random.onUnitSphere * Random.Range(1.0f, maxWanderRadius);
@@ -214,7 +216,8 @@ public class BatManager : MonoBehaviour
         {
             preyWeights[i] = Random.Range(0.0f, 1.0f);
 
-            prey[i].position = new Vector3(Random.Range(AreaMin, AreaMax), Random.Range(AreaMin, AreaMax), Random.Range(AreaMin, AreaMax));
+            prey[i].transform.position = new Vector3(Random.Range(AreaMin.x, AreaMax.x), Random.Range(AreaMin.y, AreaMax.y), Random.Range(AreaMin.z, AreaMax.z));
+            prey[i].GenerateFireflies((int)(preyWeights[i] * 50.0f));
             //prey[i].localScale = new Vector3(1.0f + preyWeights[i] * 20.0f, 1.0f + preyWeights[i] * 20.0f, 1.0f + preyWeights[i] * 20.0f);
             prey[i].gameObject.SetActive(true);
         }

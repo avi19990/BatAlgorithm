@@ -48,9 +48,9 @@ public class BatHuntState : IBatState
             }
 
             newSolution = new Vector3(
-                Mathf.Clamp(newSolution.x, manager.AreaMin, manager.AreaMax),
-                Mathf.Clamp(newSolution.y, manager.AreaMin, manager.AreaMax),
-                Mathf.Clamp(newSolution.z, manager.AreaMin, manager.AreaMax)
+                Mathf.Clamp(newSolution.x, manager.AreaMin.x, manager.AreaMax.x),
+                Mathf.Clamp(newSolution.y, manager.AreaMin.y, manager.AreaMax.y),
+                Mathf.Clamp(newSolution.z, manager.AreaMin.z, manager.AreaMax.z)
                 );
 
             float evalValue = Evaluation(newSolution);
@@ -75,7 +75,7 @@ public class BatHuntState : IBatState
         float bestEval = float.MaxValue;
         for (int i = 0; i < manager.Prey.Count; ++i)
         {
-            float distance = Vector3.Distance(position, manager.Prey[i].position) / manager.PreyWeights[i] + 10.0f * (1.0f - manager.PreyWeights[i]);
+            float distance = Vector3.Distance(position, manager.Prey[i].transform.position) / manager.PreyWeights[i] + 10.0f * (1.0f - manager.PreyWeights[i]);
             if (distance < bestEval)
                 bestEval = distance;
         }

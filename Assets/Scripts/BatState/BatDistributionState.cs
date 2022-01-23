@@ -32,7 +32,7 @@ public class BatDistributionState : IBatState
     public bool Update()
     {
         for (int i = 0; i < manager.BatsCount; ++i)
-            manager.Bats[i].position = new Vector3(Random.Range(manager.AreaMin, manager.AreaMax), Random.Range(manager.AreaMin, manager.AreaMax), Random.Range(manager.AreaMin, manager.AreaMax));
+            manager.Bats[i].position = new Vector3(Random.Range(manager.AreaMin.x, manager.AreaMax.x), Random.Range(manager.AreaMin.y, manager.AreaMax.y), Random.Range(manager.AreaMin.z, manager.AreaMax.z));
 
         return true;
     }
